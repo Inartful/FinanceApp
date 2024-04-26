@@ -1,4 +1,4 @@
-package com.example.financeapp.domain.util
+package com.example.financeapp.feature_transaction.domain.util
 
 import androidx.room.TypeConverter
 import java.time.LocalDateTime

@@ -1,4 +1,4 @@
-package com.example.financeapp.presentation
+package com.example.financeapp.feature_transaction.presentation
 
 import android.os.Bundle
 import android.util.Log
@@ -10,37 +10,34 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.room.Room.databaseBuilder
-import com.example.financeapp.data.data_source.AppDatabase
-import com.example.financeapp.domain.model.Transactions
-import com.example.financeapp.domain.util.TransactionType
+import com.example.financeapp.feature_transaction.data.data_source.TransactionDAO
+import com.example.financeapp.feature_transaction.domain.model.Transaction
+import com.example.financeapp.feature_transaction.domain.repository.TransactionRepository
+import com.example.financeapp.feature_transaction.domain.util.TransactionType
 import com.example.financeapp.ui.theme.FinanceAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var repo: TransactionRepository
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var db = databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "transactions-db"
-        ).build()
-
-        val transaction = Transactions(
-            dateTime = LocalDateTime.now(),
-            type = TransactionType.Income,
-            amount = 100
-        )
-
         GlobalScope.launch(Dispatchers.Main) {
-            db.transactionDAO.insertTransaction(transaction)
-            val transactions = db.transactionDAO.getAllTransactions()
+            repo.insertTransaction(Transaction(
+                dateTime = LocalDateTime.now(),
+                type = TransactionType.Income,
+                amount = 500)
+            )
+            val transactions = repo.getAllTransactions()
             updateUI(transactions)
         }
 
@@ -66,15 +63,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FinanceAppTheme {
-        Greeting("Android")
-    }
-}
-
-private suspend fun updateUI(transactions: Flow<List<Transactions>>) {
+private suspend fun updateUI(transactions: Flow<List<Transaction>>) {
     transactions.collect { transaction ->
         Log.i("trans", "${transaction}" )
     }

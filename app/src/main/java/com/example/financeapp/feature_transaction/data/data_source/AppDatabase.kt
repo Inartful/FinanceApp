@@ -1,14 +1,14 @@
-package com.example.financeapp.data.data_source
+package com.example.financeapp.feature_transaction.data.data_source
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.financeapp.domain.model.Transactions
-import com.example.financeapp.domain.util.Converters
+import com.example.financeapp.feature_transaction.domain.model.Transaction
+import com.example.financeapp.feature_transaction.domain.util.Converters
 
 @Database(
-    entities = [Transactions::class],
-    version = 1
+    entities = [Transaction::class],
+    version = 2
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase:RoomDatabase() {

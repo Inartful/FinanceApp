@@ -1,4 +1,4 @@
-package com.example.financeapp.domain.util
+package com.example.financeapp.feature_transaction.domain.util
 
 sealed class TransactionType {
     object Income: TransactionType()

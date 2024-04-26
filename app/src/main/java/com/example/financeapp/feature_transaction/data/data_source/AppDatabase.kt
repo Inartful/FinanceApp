@@ -8,7 +8,7 @@ import com.example.financeapp.feature_transaction.domain.util.Converters
 
 @Database(
     entities = [Transaction::class],
-    version = 2
+    version = 3
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase:RoomDatabase() {

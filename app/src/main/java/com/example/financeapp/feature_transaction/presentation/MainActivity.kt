@@ -13,32 +13,43 @@ import androidx.compose.ui.Modifier
 import com.example.financeapp.feature_transaction.data.data_source.TransactionDAO
 import com.example.financeapp.feature_transaction.domain.model.Transaction
 import com.example.financeapp.feature_transaction.domain.repository.TransactionRepository
+import com.example.financeapp.feature_transaction.domain.use_cases.TransactionUseCases
+import com.example.financeapp.feature_transaction.domain.util.CurrencyType
 import com.example.financeapp.feature_transaction.domain.util.TransactionType
 import com.example.financeapp.ui.theme.FinanceAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.time.Clock
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.Currency
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     @Inject
-    lateinit var repo: TransactionRepository
+    lateinit var useCases: TransactionUseCases
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         GlobalScope.launch(Dispatchers.Main) {
-            repo.insertTransaction(Transaction(
-                dateTime = LocalDateTime.now(),
-                type = TransactionType.Income,
-                amount = 500)
-            )
-            val transactions = repo.getAllTransactions()
-            updateUI(transactions)
+//            useCases.addTransactionUseCase(Transaction(
+//                dateTime = LocalDateTime.now(),
+//                type = TransactionType.Income,
+//                amount = 400,
+//                currency = CurrencyType.KZT
+//                ))
+            val transactions = useCases.getAllTransactionsUseCase()
+            transactions.collect {
+                for (transaction in it) {
+                    Log.i("trans", "${transaction}" )
+                }
+            }
         }
 
         setContent {
@@ -61,10 +72,4 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         text = "Hello ${LocalDateTime.now().month}!",
         modifier = modifier
     )
-}
-
-private suspend fun updateUI(transactions: Flow<List<Transaction>>) {
-    transactions.collect { transaction ->
-        Log.i("trans", "${transaction}" )
-    }
 }

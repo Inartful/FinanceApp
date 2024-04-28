@@ -10,48 +10,26 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.financeapp.feature_transaction.data.data_source.TransactionDAO
+import androidx.lifecycle.ViewModelProvider
 import com.example.financeapp.feature_transaction.domain.model.Transaction
-import com.example.financeapp.feature_transaction.domain.repository.TransactionRepository
-import com.example.financeapp.feature_transaction.domain.use_cases.TransactionUseCases
-import com.example.financeapp.feature_transaction.domain.util.CurrencyType
+import com.example.financeapp.feature_transaction.domain.use_cases.UseCases
 import com.example.financeapp.feature_transaction.domain.util.TransactionType
 import com.example.financeapp.ui.theme.FinanceAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import java.time.Clock
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.util.Currency
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var useCases: TransactionUseCases
+    private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        GlobalScope.launch(Dispatchers.Main) {
-//            useCases.addTransactionUseCase(Transaction(
-//                dateTime = LocalDateTime.now(),
-//                type = TransactionType.Income,
-//                amount = 400,
-//                currency = CurrencyType.KZT
-//                ))
-            val transactions = useCases.getAllTransactionsUseCase()
-            transactions.collect {
-                for (transaction in it) {
-                    Log.i("trans", "${transaction}" )
-                }
-            }
-        }
-
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel.performTransaction()
         setContent {
             FinanceAppTheme {
                 // A surface container using the 'background' color from the theme

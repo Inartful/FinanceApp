@@ -1,14 +1,14 @@
 package com.example.financeapp.feature_transaction.domain.use_cases
 
 import com.example.financeapp.feature_transaction.domain.model.Transaction
-import com.example.financeapp.feature_transaction.domain.repository.TransactionRepository
+import com.example.financeapp.feature_transaction.domain.repository.Repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class GetAllTransactionsUseCase(
-    private val repository: TransactionRepository
+    private val repository: Repository
 ) {
-    suspend operator fun invoke(): Flow<List<Transaction>> {
+    operator fun invoke(): Flow<List<Transaction>> {
         return repository.getAllTransactions().map {transactions ->
             transactions.sortedByDescending { it.dateTime }
         }

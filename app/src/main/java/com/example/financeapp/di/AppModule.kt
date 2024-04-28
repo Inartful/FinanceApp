@@ -3,13 +3,17 @@ package com.example.financeapp.di
 import android.app.Application
 import androidx.room.Room
 import com.example.financeapp.feature_transaction.data.data_source.AppDatabase
-import com.example.financeapp.feature_transaction.data.repository.TransactionRepositoryImpl
-import com.example.financeapp.feature_transaction.domain.repository.TransactionRepository
+import com.example.financeapp.feature_transaction.data.repository.RepositoryImpl
+import com.example.financeapp.feature_transaction.domain.repository.Repository
+import com.example.financeapp.feature_transaction.domain.use_cases.AddAccountUseCase
 import com.example.financeapp.feature_transaction.domain.use_cases.AddTransactionUseCase
+import com.example.financeapp.feature_transaction.domain.use_cases.DeleteAccountUseCase
 import com.example.financeapp.feature_transaction.domain.use_cases.DeleteTransactionUseCase
+import com.example.financeapp.feature_transaction.domain.use_cases.GetAccountUseCase
+import com.example.financeapp.feature_transaction.domain.use_cases.GetAllAccountUseCase
 import com.example.financeapp.feature_transaction.domain.use_cases.GetAllTransactionsUseCase
 import com.example.financeapp.feature_transaction.domain.use_cases.GetTransactionUseCase
-import com.example.financeapp.feature_transaction.domain.use_cases.TransactionUseCases
+import com.example.financeapp.feature_transaction.domain.use_cases.UseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,18 +38,22 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideTransactionRepository(db: AppDatabase): TransactionRepository {
-        return TransactionRepositoryImpl(db.transactionDAO)
+    fun provideTransactionRepository(db: AppDatabase): Repository {
+        return RepositoryImpl(db.DAO)
     }
 
     @Provides
     @Singleton
-    fun provideTransactionUseCases(repository: TransactionRepository): TransactionUseCases {
-        return TransactionUseCases(
-            getAllTransactionsUseCase = GetAllTransactionsUseCase(repository),
-            deleteTransactionUseCase = DeleteTransactionUseCase(repository),
-            addTransactionUseCase = AddTransactionUseCase(repository),
-            getTransactionUseCase = GetTransactionUseCase(repository)
+    fun provideTransactionUseCases(repository: Repository): UseCases {
+        return UseCases(
+            getAllTransactions = GetAllTransactionsUseCase(repository),
+            deleteTransaction = DeleteTransactionUseCase(repository),
+            addTransaction = AddTransactionUseCase(repository),
+            getTransaction = GetTransactionUseCase(repository),
+            getAccount = GetAccountUseCase(repository),
+            deleteAccount = DeleteAccountUseCase(repository),
+            addAccount = AddAccountUseCase(repository),
+            getAllAccount = GetAllAccountUseCase(repository)
         )
     }
 }

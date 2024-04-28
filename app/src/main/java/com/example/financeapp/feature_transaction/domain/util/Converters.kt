@@ -34,6 +34,7 @@ class Converters {
         }
     }
 
+//     For currency
     @TypeConverter
     fun fromCurrencyType(value: String): CurrencyType {
         return when (value) {

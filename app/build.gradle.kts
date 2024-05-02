@@ -70,6 +70,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //navigation
+
+    implementation(libs.androidx.navigation.compose)
+
     //coroutines
     implementation(libs.kotlinx.coroutines.android)
 
@@ -84,6 +88,7 @@ dependencies {
     //hilt
     implementation(libs.hilt.android)
     kapt(libs.dagger.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 }
 
 kapt {

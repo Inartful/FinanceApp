@@ -8,6 +8,6 @@ data class UseCases(
 
     val addAccount: AddAccountUseCase,
     val deleteAccount: DeleteAccountUseCase,
-    val getAllAccount: GetAllAccountUseCase,
+    val getAllAccounts: GetAllAccountUseCase,
     val getAccount: GetAccountUseCase,
 )

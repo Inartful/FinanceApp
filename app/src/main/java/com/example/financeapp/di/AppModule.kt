@@ -53,7 +53,7 @@ class DatabaseModule {
             getAccount = GetAccountUseCase(repository),
             deleteAccount = DeleteAccountUseCase(repository),
             addAccount = AddAccountUseCase(repository),
-            getAllAccount = GetAllAccountUseCase(repository)
+            getAllAccounts = GetAllAccountUseCase(repository)
         )
     }
 }

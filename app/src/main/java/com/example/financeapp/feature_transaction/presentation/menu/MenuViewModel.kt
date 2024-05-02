@@ -23,22 +23,27 @@ class MenuViewModel @Inject constructor(
     private var getAccountsJob: Job? = null
 
     init {
-        getTransactions()
+        getTransactions(1)
         getAccounts()
     }
 
-    private fun getTransactions() {
+    fun onEvent(event: MenuEvents) {
+        when(event) {
+            is MenuEvents.ChangeAccount -> getTransactions(event.account.id!!)
+        }
+    }
+
+    private fun getTransactions(accountId: Int) {
         getTransactionsJob?.cancel()
-        getTransactionsJob = useCases.getAllTransactions()
+        getTransactionsJob = useCases.getAllTransactions(accountId)
             .onEach { transactions ->
                 val lastFiveTransactions = if (transactions.size >= 5) {
                     transactions.take(5)
                 } else {
                     transactions
                 }
-
                 _state.value = state.value.copy(
-                    transactions = transactions
+                    transactions = lastFiveTransactions
                 )
             }.launchIn(viewModelScope)
     }

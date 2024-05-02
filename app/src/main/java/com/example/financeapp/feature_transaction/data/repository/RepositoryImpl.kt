@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.Flow
 class RepositoryImpl(
     private val dao: Dao
 ): Repository {
-    override fun getAllTransactions(): Flow<List<Transaction>> {
-        return dao.getAllTransactions()
+    override fun getAllTransactions(accountId: Int): Flow<List<Transaction>> {
+        return dao.getAllTransactions(accountId)
     }
     override fun getAllAccounts(): Flow<List<Account>> {
         return dao.getAllAccounts()

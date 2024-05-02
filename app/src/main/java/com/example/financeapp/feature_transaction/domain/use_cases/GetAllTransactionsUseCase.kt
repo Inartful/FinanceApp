@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.map
 class GetAllTransactionsUseCase(
     private val repository: Repository
 ) {
-    operator fun invoke(): Flow<List<Transaction>> {
-        return repository.getAllTransactions().map {transactions ->
+    operator fun invoke(accountId: Int): Flow<List<Transaction>> {
+        return repository.getAllTransactions(accountId).map {transactions ->
             transactions.sortedByDescending { it.dateTime }
         }
     }

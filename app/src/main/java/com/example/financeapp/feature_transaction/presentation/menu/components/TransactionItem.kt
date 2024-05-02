@@ -1,5 +1,6 @@
 package com.example.financeapp.feature_transaction.presentation.menu.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,22 +10,29 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ShoppingCart
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.DateRange
+import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.sharp.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.financeapp.feature_transaction.domain.model.Transaction
+import com.example.financeapp.feature_transaction.domain.util.CategoryType
 import com.example.financeapp.feature_transaction.domain.util.TransactionType
 import com.example.financeapp.ui.theme.FinanceAppTheme
+import com.example.financeapp.ui.theme.LittleGrey
 import java.time.LocalDateTime
 
 @Composable
@@ -36,26 +44,55 @@ fun TransactionItem(
         modifier = modifier
             .fillMaxWidth()
             .height(80.dp)
-            .padding(end = 10.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+            .padding(5.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             modifier = Modifier
-                .fillMaxHeight()
-                .width(70.dp)
+                .size(50.dp)
+                .clip(CircleShape)
+                .background(LittleGrey)
                 .padding(10.dp),
-            imageVector = Icons.Rounded.ShoppingCart,
-            contentDescription = null
+            imageVector = when(transaction.category) {
+                CategoryType.Expense.Debt -> Icons.Sharp.Clear
+                CategoryType.Expense.Entertainment -> Icons.Sharp.Clear
+                CategoryType.Expense.Food -> Icons.Sharp.Clear
+                CategoryType.Expense.House -> Icons.Rounded.Home
+                CategoryType.Expense.Insurance -> Icons.Sharp.Clear
+                CategoryType.Expense.Medicine -> Icons.Rounded.Add
+                CategoryType.Expense.Miscellaneous -> Icons.Sharp.Clear
+                CategoryType.Expense.Personal -> Icons.Sharp.Clear
+                CategoryType.Expense.Taxes -> Icons.Sharp.Clear
+                CategoryType.Expense.Transport -> Icons.Sharp.Clear
+                CategoryType.Income.Investment -> Icons.Sharp.Clear
+                CategoryType.Income.Salary -> Icons.Rounded.DateRange
+            },
+            contentDescription = transaction.name,
+            tint = MaterialTheme.colorScheme.primary
         )
         Column(
             modifier = Modifier
                 .fillMaxHeight()
                 .weight(1f)
-                .padding(vertical = 10.dp),
+                .padding(10.dp),
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Some name",
+                text = transaction.name ?: when(transaction.category) {
+                    CategoryType.Expense.Debt -> "Debt"
+                    CategoryType.Expense.Entertainment -> "Entertainment"
+                    CategoryType.Expense.Food -> "Food"
+                    CategoryType.Expense.House -> "House"
+                    CategoryType.Expense.Insurance -> "Insurance"
+                    CategoryType.Expense.Medicine -> "Medicine"
+                    CategoryType.Expense.Miscellaneous -> "Miscellaneous"
+                    CategoryType.Expense.Personal -> "Personal"
+                    CategoryType.Expense.Taxes -> "Taxes"
+                    CategoryType.Expense.Transport -> "Transport"
+                    CategoryType.Income.Investment -> "Investment"
+                    CategoryType.Income.Salary -> "Salary"
+                },
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -87,7 +124,8 @@ fun TransactionItem(
                 } else {
                     "- ${transaction.amount}₸"
                 },
-                fontSize = 25.sp
+                fontSize = 25.sp,
+                fontWeight = FontWeight.Normal
             )
         }
     }
@@ -102,7 +140,9 @@ fun TransactionItemPreview() {
             LocalDateTime.now(),
             type = TransactionType.Income,
             amount = 15,
-            accountId = 1
+            accountId = 1,
+            category = CategoryType.Income.Salary,
+            name = "Salary"
         ))
     }
 }

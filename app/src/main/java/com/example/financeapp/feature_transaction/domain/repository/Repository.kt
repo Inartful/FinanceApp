@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface Repository {
 
-    fun getAllTransactions(): Flow<List<Transaction>>
+    fun getAllTransactions(accountId: Int): Flow<List<Transaction>>
     fun getAllAccounts(): Flow<List<Account>>
     suspend fun getTransactionById(id: Int): Transaction?
     suspend fun getAccountById(id: Int): Account?

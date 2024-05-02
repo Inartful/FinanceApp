@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import com.example.financeapp.feature_transaction.domain.model.Account
 import com.example.financeapp.feature_transaction.domain.model.Transaction
 import kotlinx.coroutines.flow.Flow
@@ -13,8 +12,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface Dao {
 
-    @Query("SELECT * FROM `transaction`")
-    fun getAllTransactions(): Flow<List<Transaction>>
+    @Query("SELECT * FROM `transaction` WHERE accountId = :accountId")
+    fun getAllTransactions(accountId: Int): Flow<List<Transaction>>
     @Query("SELECT * FROM `account`")
     fun getAllAccounts(): Flow<List<Account>>
 

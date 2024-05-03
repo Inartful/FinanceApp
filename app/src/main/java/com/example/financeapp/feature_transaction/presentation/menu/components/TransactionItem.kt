@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.sp
 import com.example.financeapp.feature_transaction.domain.model.Transaction
 import com.example.financeapp.feature_transaction.domain.util.CategoryType
 import com.example.financeapp.feature_transaction.domain.util.TransactionType
+import com.example.financeapp.feature_transaction.domain.util.getCategoryName
 import com.example.financeapp.ui.theme.FinanceAppTheme
-import com.example.financeapp.ui.theme.LittleGrey
 import java.time.LocalDateTime
 
 @Composable
@@ -52,7 +52,7 @@ fun TransactionItem(
             modifier = Modifier
                 .size(50.dp)
                 .clip(CircleShape)
-                .background(LittleGrey)
+                .background(MaterialTheme.colorScheme.tertiary)
                 .padding(10.dp),
             imageVector = when(transaction.category) {
                 CategoryType.Expense.Debt -> Icons.Sharp.Clear
@@ -79,20 +79,7 @@ fun TransactionItem(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = transaction.name ?: when(transaction.category) {
-                    CategoryType.Expense.Debt -> "Debt"
-                    CategoryType.Expense.Entertainment -> "Entertainment"
-                    CategoryType.Expense.Food -> "Food"
-                    CategoryType.Expense.House -> "House"
-                    CategoryType.Expense.Insurance -> "Insurance"
-                    CategoryType.Expense.Medicine -> "Medicine"
-                    CategoryType.Expense.Miscellaneous -> "Miscellaneous"
-                    CategoryType.Expense.Personal -> "Personal"
-                    CategoryType.Expense.Taxes -> "Taxes"
-                    CategoryType.Expense.Transport -> "Transport"
-                    CategoryType.Income.Investment -> "Investment"
-                    CategoryType.Income.Salary -> "Salary"
-                },
+                text = transaction.name ?: getCategoryName(transaction.category),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )

@@ -21,7 +21,7 @@ class Converters {
     fun fromTransactionType(value: TransactionType): String {
         return when (value) {
             is TransactionType.Income -> "Income"
-            is TransactionType.Outcome -> "Outcome"
+            is TransactionType.Expense -> "Outcome"
         }
     }
 
@@ -29,7 +29,7 @@ class Converters {
     fun toTransactionType(value: String): TransactionType {
         return when (value) {
             "Income" -> TransactionType.Income
-            "Outcome" -> TransactionType.Outcome
+            "Outcome" -> TransactionType.Expense
             else -> throw IllegalArgumentException("Unknown transaction type: $value")
         }
     }

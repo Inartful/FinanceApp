@@ -21,7 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.financeapp.feature_transaction.domain.model.Transaction
-import com.example.financeapp.ui.theme.LittleGrey
 
 @Composable
 fun TransactionsList(
@@ -52,10 +51,10 @@ fun TransactionsList(
                     modifier = Modifier.height(30.dp),
                     onClick = historyOnClick,
                     colors = ButtonColors(
-                        containerColor = LittleGrey,
+                        containerColor = MaterialTheme.colorScheme.tertiary,
                         contentColor = MaterialTheme.colorScheme.primary,
-                        disabledContentColor = LittleGrey,
-                        disabledContainerColor = LittleGrey
+                        disabledContentColor = MaterialTheme.colorScheme.tertiary,
+                        disabledContainerColor = MaterialTheme.colorScheme.tertiary
                     ),
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
                 ) {

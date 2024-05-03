@@ -25,7 +25,7 @@ class AddTransactionUseCase(
                         amount = originalAccount.amount + transaction.amount
                     )
                 )
-            TransactionType.Outcome ->
+            TransactionType.Expense ->
                 repository.insertAccount(
                     originalAccount.copy(
                         amount = originalAccount.amount - transaction.amount

@@ -18,3 +18,20 @@ sealed class CategoryType {
         object Investment:Income()
     }
 }
+
+public fun getCategoryName(category: CategoryType): String {
+    return when (category) {
+        is CategoryType.Expense.House -> "House"
+        is CategoryType.Expense.Food -> "Food"
+        is CategoryType.Expense.Transport -> "Transport"
+        is CategoryType.Expense.Medicine -> "Medicine"
+        is CategoryType.Expense.Personal -> "Personal"
+        is CategoryType.Expense.Entertainment -> "Entertainment"
+        is CategoryType.Expense.Debt -> "Debt"
+        is CategoryType.Expense.Insurance -> "Insurance"
+        is CategoryType.Expense.Taxes -> "Taxes"
+        is CategoryType.Expense.Miscellaneous -> "Miscellaneous"
+        is CategoryType.Income.Salary -> "Salary"
+        is CategoryType.Income.Investment -> "Investment"
+    }
+}

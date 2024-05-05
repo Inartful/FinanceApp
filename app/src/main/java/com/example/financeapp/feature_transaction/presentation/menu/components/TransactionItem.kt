@@ -79,7 +79,13 @@ fun TransactionItem(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = transaction.name ?: getCategoryName(transaction.category),
+                text =
+                if (transaction.name.isNullOrBlank()) {
+                    getCategoryName(transaction.category)
+                }
+                else {
+                    transaction.name
+                },
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )

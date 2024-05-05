@@ -3,6 +3,7 @@ package com.example.financeapp.feature_transaction.presentation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.financeapp.feature_transaction.domain.model.Account
 import com.example.financeapp.feature_transaction.domain.use_cases.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,49 +17,34 @@ class MainViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-//                useCases.addAccount(
-//                    Account(
-//                        id = 1,
-//                        amount = 0,
-//                        name = "For scroll"
-//                    )
-//                )
-//                useCases.addAccount(
-//                    Account(
-//                        id = 2,
-//                        amount = 0,
-//                        name = "For scroll"
-//                    )
-//                )
-//                useCases.addAccount(
-//                    Account(
-//                        id = 3,
-//                        amount = 0,
-//                        name = "For scroll"
-//                    )
-//                )
-//                repeat(5) {
-//                    useCases.addTransaction(
-//                        Transaction(
-//                            dateTime = LocalDateTime.now(),
-//                            type = TransactionType.Income,
-//                            amount = 600,
-//                            accountId = 2,
-//                            category = CategoryType.Income.Salary,
-//                            name = "Salary"
+                useCases.addAccount(
+                    Account(
+                        amount = 0,
+                        name = "General"
+                    )
+                )
+                useCases.addAccount(
+                    Account(
+                        amount = 0,
+                        name = "Saving"
+                    )
+                )
+                useCases.addAccount(
+                    Account(
+                        amount = 0,
+                        name = "For scroll"
+                    )
+                )
+
+//                repeat(5) {it ->
+//                    useCases.deleteAccount(
+//                        Account(
+//                            id = it,
+//                            amount = 0,
+//                            name = "For scroll"
 //                        )
 //                    )
 //                }
-//                useCases.addTransaction(
-//                    Transaction(
-//                        dateTime = LocalDateTime.now(),
-//                        type = TransactionType.Income,
-//                        amount = 600,
-//                        accountId = 1,
-//                        category = CategoryType.Income.Salary,
-//                        name = "Salary"
-//                    )
-//                )
             } catch (e: Exception) {
                 Log.e("ex", e.message!!)
             }

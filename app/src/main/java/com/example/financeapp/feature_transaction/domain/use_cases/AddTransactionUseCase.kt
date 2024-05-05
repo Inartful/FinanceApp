@@ -26,11 +26,19 @@ class AddTransactionUseCase(
                     )
                 )
             TransactionType.Expense ->
-                repository.insertAccount(
-                    originalAccount.copy(
-                        amount = originalAccount.amount - transaction.amount
+                if (originalAccount.amount < transaction.amount) {
+                    throw InvalidTransactionException("Transaction amount can not be " +
+                            "lower then account amount")
+                } else {
+                    repository.insertAccount(
+                        originalAccount.copy(
+                            amount = originalAccount.amount - transaction.amount
+                        )
                     )
-                )
+                }
+        }
+        if (transaction.amount <= 0) {
+            throw InvalidTransactionException("Transaction amount can not be 0 or negative")
         }
         repository.insertTransaction(transaction)
     }

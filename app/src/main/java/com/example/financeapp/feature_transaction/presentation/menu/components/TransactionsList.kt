@@ -26,7 +26,8 @@ import com.example.financeapp.feature_transaction.domain.model.Transaction
 fun TransactionsList(
     transactions: List<Transaction>,
     modifier: Modifier = Modifier,
-    historyOnClick: () -> Unit) {
+    historyOnClick: () -> Unit,
+    transactionOnClick: (transactionId: Int) -> Unit) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -65,7 +66,10 @@ fun TransactionsList(
                 }
             }
             transactions.forEach { transaction ->
-                TransactionItem(transaction = transaction)
+                TransactionItem(
+                    transaction = transaction,
+                    transactionOnClick = transactionOnClick
+                )
             }
         }
     }

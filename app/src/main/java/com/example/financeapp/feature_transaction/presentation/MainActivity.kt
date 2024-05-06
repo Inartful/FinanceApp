@@ -41,11 +41,10 @@ class MainActivity : ComponentActivity() {
                             MenuScreen(navController = navController)
                         }
                         composable(
-                            route = Screen.AddTransaction.route + "?id={id}",
+                            route = Screen.AddTransaction.route + "/{id}",
                             arguments = listOf(
                                 navArgument("id") {
                                     type = NavType.IntType
-                                    defaultValue = -1
                                     nullable = false
                                 }
                             )

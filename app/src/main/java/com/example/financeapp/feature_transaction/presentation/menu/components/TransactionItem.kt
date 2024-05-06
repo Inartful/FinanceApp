@@ -1,6 +1,7 @@
 package com.example.financeapp.feature_transaction.presentation.menu.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,28 +26,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.financeapp.feature_transaction.domain.model.Transaction
 import com.example.financeapp.feature_transaction.domain.util.CategoryType
 import com.example.financeapp.feature_transaction.domain.util.TransactionType
 import com.example.financeapp.feature_transaction.domain.util.getCategoryName
-import com.example.financeapp.ui.theme.FinanceAppTheme
 import java.time.LocalDateTime
 
 @Composable
 fun TransactionItem(
     transaction: Transaction,
+    transactionOnClick: (transactionId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .height(80.dp)
-            .padding(5.dp),
+            .padding(5.dp)
+            .clickable { transactionOnClick(transaction.id!!) },
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
             modifier = Modifier
@@ -124,65 +125,18 @@ fun TransactionItem(
     }
 }
 
-@Preview
-@Composable
-fun TransactionItemPreview() {
-    FinanceAppTheme {
-        TransactionItem(transaction = Transaction(
-            id = 1,
-            LocalDateTime.now(),
-            type = TransactionType.Income,
-            amount = 15,
-            accountId = 1,
-            category = CategoryType.Income.Salary,
-            name = "Salary"
-        ))
-    }
-}
-
-//Box(
-//        modifier = modifier
-//            .fillMaxWidth()
-//            .clip(RoundedCornerShape(16.dp))
-//            .shadow(8.dp, spotColor = Color.Red)
-//            .background(MaterialTheme.colorScheme.primary)
-//            .padding(10.dp)
-//    ) {
-//        Column {
-//            Text(
-//                text = "Date: ${
-//                    if (transaction.dateTime.dayOfMonth == LocalDateTime.now().dayOfMonth
-//                        && transaction.dateTime.month == LocalDateTime.now().month) {
-//                        "Today"
-//                    } else if (transaction.dateTime.dayOfMonth == (LocalDateTime.now().dayOfMonth-1)
-//                        && transaction.dateTime.month == LocalDateTime.now().month) {
-//                        "Yesterday"
-//                    } else {
-//                        "${transaction.dateTime.dayOfMonth}" +
-//                                " ${transaction.dateTime.month}".toLowerCase()
-//                    }
-//                }",
-//                style = MaterialTheme.typography.bodyMedium,
-//                fontWeight = FontWeight.Bold,
-//                fontSize = 16.sp
-//            )
-//            Spacer(modifier = Modifier.height(4.dp))
-//            Text(
-//                text = "Type: ${
-//                    if (transaction.type == TransactionType.Income) {
-//                        "Income"
-//                    } else {
-//                        "Expenses"
-//                    }
-//                }",
-//                style = MaterialTheme.typography.bodyMedium,
-//                fontSize = 14.sp
-//            )
-//            Spacer(modifier = Modifier.height(4.dp))
-//            Text(
-//                text = "Amount: ${transaction.amount}",
-//                style = MaterialTheme.typography.bodyMedium,
-//                fontSize = 14.sp
-//            )
-//        }
+//@Preview
+//@Composable
+//fun TransactionItemPreview() {
+//    FinanceAppTheme {
+//        TransactionItem(transaction = Transaction(
+//            id = 1,
+//            LocalDateTime.now(),
+//            type = TransactionType.Income,
+//            amount = 15,
+//            accountId = 1,
+//            category = CategoryType.Income.Salary,
+//            name = "Salary"
+//        ))
 //    }
+//}

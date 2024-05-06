@@ -28,7 +28,13 @@ fun EnterAmount(
         if(state.value.amount <= 0) { "" }
         else { state.value.amount.toString() },
         onValueChange = {
-            viewModel.onEvent(AddTransactionEvents.ChangeAmount(it.toInt()))
+            viewModel.onEvent(AddTransactionEvents.ChangeAmount(
+                if (it.isNotBlank()) {
+                    it.toInt()
+                } else {
+                    0
+                }
+            ))
         },
         placeholder = {
             if (state.value.amount <= 0) {

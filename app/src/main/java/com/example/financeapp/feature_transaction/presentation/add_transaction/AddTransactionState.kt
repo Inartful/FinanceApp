@@ -6,6 +6,7 @@ import com.example.financeapp.feature_transaction.domain.util.TransactionType
 import java.time.LocalDateTime
 
 data class AddTransactionState(
+    val id: Int? = null,
     val type: TransactionType = TransactionType.Expense,
     val category: CategoryType = CategoryType.Expense.House,
     val name: String = "",

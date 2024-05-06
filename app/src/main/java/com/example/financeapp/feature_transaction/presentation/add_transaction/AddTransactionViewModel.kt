@@ -12,6 +12,7 @@ import com.example.financeapp.feature_transaction.domain.util.CategoryType
 import com.example.financeapp.feature_transaction.domain.util.TransactionType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -71,7 +72,7 @@ class AddTransactionViewModel @Inject constructor(
                 }
 
                 is AddTransactionEvents.ChangeAmount -> {
-                    if (event.amount in 1..9999999) {
+                    if (event.amount in 0..9999999) {
                         _state.value = state.value.copy(amount = event.amount)
                     } else {
                         TODO()
@@ -84,15 +85,27 @@ class AddTransactionViewModel @Inject constructor(
                 is AddTransactionEvents.SaveTransaction -> {
                     viewModelScope.launch {
                         try {
+                            val transaction = Transaction(
+                                dateTime = state.value.dateTime ?: LocalDateTime.now(),
+                                type = state.value.type,
+                                category = state.value.category,
+                                name = state.value.name,
+                                amount = state.value.amount,
+                                accountId = state.value.accountId,
+                                id = state.value.id
+                            )
+                            val waiting = async {
+                                try {
+                                    useCases.deleteTransaction(
+                                        transaction
+                                    )
+                                } catch (e: InvalidTransactionException) {
+                                Log.e("error", e.message ?: "Error")
+                            }
+                            }
+                            waiting.await()
                             useCases.addTransaction(
-                                Transaction(
-                                    dateTime = state.value.dateTime ?: LocalDateTime.now(),
-                                    type = state.value.type,
-                                    category = state.value.category,
-                                    name = state.value.name,
-                                    amount = state.value.amount,
-                                    accountId = state.value.accountId
-                                )
+                                transaction
                             )
                         } catch (e: InvalidTransactionException) {
                             Log.e("error", e.message ?: "Error")
@@ -110,6 +123,7 @@ class AddTransactionViewModel @Inject constructor(
             val transaction = useCases.getTransaction(transactionId)
             if (transaction != null) {
                 _state.value = state.value.copy(
+                    id = transaction.id,
                     accountId = transaction.accountId,
                     type = transaction.type,
                     amount = transaction.amount,

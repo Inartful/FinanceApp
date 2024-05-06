@@ -12,12 +12,14 @@ class AddTransactionUseCase(
 
     @Throws(InvalidTransactionException::class)
     suspend operator fun invoke(transaction: Transaction) {
-
         val accounts = repository.getAllAccounts().firstOrNull()
             ?: throw InvalidTransactionException("No accounts found")
         val originalAccount = accounts.find { it.id == transaction.accountId }
             ?: throw InvalidTransactionException("Account not found")
 
+        if (transaction.amount <= 0) {
+            throw InvalidTransactionException("Transaction amount can not be 0 or negative")
+        }
         when (transaction.type) {
             TransactionType.Income ->
                 repository.insertAccount(
@@ -36,9 +38,6 @@ class AddTransactionUseCase(
                         )
                     )
                 }
-        }
-        if (transaction.amount <= 0) {
-            throw InvalidTransactionException("Transaction amount can not be 0 or negative")
         }
         repository.insertTransaction(transaction)
     }

@@ -36,7 +36,7 @@ fun MenuScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navController.navigate(Screen.AddTransaction.route) },
+                onClick = { navController.navigate(Screen.AddTransaction.route + "/-1") },
                 containerColor = MaterialTheme.colorScheme.tertiary,
                 shape = CircleShape
                 ) {
@@ -63,7 +63,10 @@ fun MenuScreen(
             Spacer(modifier = Modifier.height(14.dp))
             TransactionsList(
                 transactions = state.value.transactions,
-                historyOnClick = {}
+                historyOnClick = {},
+                transactionOnClick = {transactionId ->
+                    navController.navigate(Screen.AddTransaction.route + "/$transactionId")
+                }
             )
         }
     }

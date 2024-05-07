@@ -5,5 +5,6 @@ import com.example.financeapp.feature_transaction.domain.model.Transaction
 
 data class MenuState(
     val transactions: List<Transaction> = emptyList(),
-    val accounts: List<Account> = emptyList()
+    val accounts: List<Account> = emptyList(),
+    val selected: Int = 0
 )

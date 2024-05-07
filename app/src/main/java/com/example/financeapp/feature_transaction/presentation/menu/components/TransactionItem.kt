@@ -13,11 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.DateRange
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.sharp.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,9 +20,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.financeapp.R
 import com.example.financeapp.feature_transaction.domain.model.Transaction
 import com.example.financeapp.feature_transaction.domain.util.CategoryType
 import com.example.financeapp.feature_transaction.domain.util.TransactionType
@@ -40,6 +37,9 @@ fun TransactionItem(
     transactionOnClick: (transactionId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+
+    val food = R.drawable.food_dinner_svgrepo_com
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -54,20 +54,20 @@ fun TransactionItem(
                 .size(50.dp)
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.tertiary)
-                .padding(10.dp),
-            imageVector = when(transaction.category) {
-                CategoryType.Expense.Debt -> Icons.Sharp.Clear
-                CategoryType.Expense.Entertainment -> Icons.Sharp.Clear
-                CategoryType.Expense.Food -> Icons.Sharp.Clear
-                CategoryType.Expense.House -> Icons.Rounded.Home
-                CategoryType.Expense.Insurance -> Icons.Sharp.Clear
-                CategoryType.Expense.Medicine -> Icons.Rounded.Add
-                CategoryType.Expense.Miscellaneous -> Icons.Sharp.Clear
-                CategoryType.Expense.Personal -> Icons.Sharp.Clear
-                CategoryType.Expense.Taxes -> Icons.Sharp.Clear
-                CategoryType.Expense.Transport -> Icons.Sharp.Clear
-                CategoryType.Income.Investment -> Icons.Sharp.Clear
-                CategoryType.Income.Salary -> Icons.Rounded.DateRange
+                .padding(8.dp),
+            painter = when(transaction.category) {
+                CategoryType.Expense.Debt -> painterResource(R.drawable.wallet_svgrepo_com)
+                CategoryType.Expense.Entertainment -> painterResource(R.drawable.birthday_cake_celebration_gift_party_pastry_svgrepo_com)
+                CategoryType.Expense.Food -> painterResource(R.drawable.fork_and_knife_combination_svgrepo_com)
+                CategoryType.Expense.House -> painterResource(R.drawable.baseline_house_24)
+                CategoryType.Expense.Insurance -> painterResource(R.drawable.shield_check_svgrepo_com)
+                CategoryType.Expense.Medicine -> painterResource(R.drawable.medicine_capsule_svgrepo_com)
+                CategoryType.Expense.Miscellaneous -> painterResource(R.drawable.three_dots_svgrepo_com)
+                CategoryType.Expense.Personal -> painterResource(R.drawable.baseline_person_24)
+                CategoryType.Expense.Taxes -> painterResource(R.drawable.taxes_round_svgrepo_com)
+                CategoryType.Expense.Transport -> painterResource(R.drawable.baseline_directions_car_24)
+                CategoryType.Income.Investment -> painterResource(R.drawable.investment_portfolio_money_investment_cash_payment_svgrepo_com)
+                CategoryType.Income.Salary -> painterResource(R.drawable.money_svgrepo_com)
             },
             contentDescription = transaction.name,
             tint = MaterialTheme.colorScheme.primary

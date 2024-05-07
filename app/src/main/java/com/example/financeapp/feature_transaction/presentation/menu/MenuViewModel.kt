@@ -32,6 +32,11 @@ class MenuViewModel @Inject constructor(
     fun onEvent(event: MenuEvents) {
         when(event) {
             is MenuEvents.ChangeAccount -> getTransactions(event.account.id!!)
+            is MenuEvents.ChangePosition -> {
+                _state.value = state.value.copy(
+                    selected = event.index
+                )
+            }
         }
     }
 

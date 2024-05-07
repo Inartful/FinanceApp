@@ -8,29 +8,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorScheme = darkColorScheme(
+    background = BlackBrown,
+    onBackground = Color.White,
+    surface = LightSalmon,
+    onSurface = Color.White,
     primary = SeaBlue,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    onPrimary = DarkSalmon,
+    secondary = Color.White,
+    tertiary = Color.White,
 )
 
 private val LightColorScheme = lightColorScheme(
-    background = Color.White,
-    onBackground = Color.Black,
-    primary = SeaBlue,
-    onPrimary = Color.White,
-    secondary = HeadlineGrey,
-    onSecondary = SeaBlue,
-    tertiary = LittleGrey,
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    background = LightSalmon,
+    onBackground = Color.Black,
+    surface = Color.White,
+    onSurface = Color.Black,
+    primary = SeaBlue,
+    onPrimary = DarkSalmon,
+    secondary = HeadlineGrey,
+    tertiary = LittleGrey,
 )
 
 @Composable

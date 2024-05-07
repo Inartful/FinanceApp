@@ -88,7 +88,8 @@ fun TransactionItem(
                     transaction.name
                 },
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                maxLines = 1
             )
             Spacer(modifier = Modifier.height(1.dp))
             Text(
@@ -119,6 +120,7 @@ fun TransactionItem(
                     "- ${transaction.amount}₸"
                 },
                 fontSize = 25.sp,
+
                 fontWeight = FontWeight.Normal
             )
         }
@@ -133,10 +135,11 @@ fun TransactionItem(
 //            id = 1,
 //            LocalDateTime.now(),
 //            type = TransactionType.Income,
-//            amount = 15,
+//            amount = 150000,
 //            accountId = 1,
 //            category = CategoryType.Income.Salary,
-//            name = "Salary"
-//        ))
+//            name = "Communistic status online"
+//        ),
+//            transactionOnClick = {})
 //    }
 //}

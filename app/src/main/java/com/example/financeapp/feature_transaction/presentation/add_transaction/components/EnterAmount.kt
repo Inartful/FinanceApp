@@ -29,7 +29,9 @@ fun EnterAmount(
         else { state.value.amount.toString() },
         onValueChange = {
             viewModel.onEvent(AddTransactionEvents.ChangeAmount(
-                if (it.isNotBlank()) {
+                if (it == "," || it == ".") {
+                    0
+                } else if (it.isNotBlank()) {
                     it.toInt()
                 } else {
                     0
@@ -49,9 +51,9 @@ fun EnterAmount(
         colors = TextFieldDefaults.colors(
             cursorColor = MaterialTheme.colorScheme.primary,
             focusedTextColor = MaterialTheme.colorScheme.primary,
-            disabledContainerColor = MaterialTheme.colorScheme.background,
-            focusedContainerColor = MaterialTheme.colorScheme.background,
-            unfocusedContainerColor = MaterialTheme.colorScheme.background
+            disabledContainerColor = MaterialTheme.colorScheme.surface,
+            focusedContainerColor = MaterialTheme.colorScheme.surface,
+            unfocusedContainerColor = MaterialTheme.colorScheme.surface
         ),
         textStyle = TextStyle(
             fontSize = 20.sp

@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.financeapp.feature_transaction.presentation.add_account.AddAccountScreen
 import com.example.financeapp.feature_transaction.presentation.add_transaction.AddTransactionScreen
 import com.example.financeapp.feature_transaction.presentation.menu.MenuScreen
 import com.example.financeapp.feature_transaction.presentation.util.Screen
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screen.MainScreen.route) {
                             MenuScreen(navController = navController)
                         }
+
                         composable(
                             route = Screen.AddTransaction.route + "/{id}",
                             arguments = listOf(
@@ -53,6 +55,19 @@ class MainActivity : ComponentActivity() {
                                 navController = navController,
                                 transactionId = entry.arguments?.getInt("id") ?: -1
                             )
+                        }
+
+                        composable(
+                            route = Screen.AddAccount.route + "/{id}",
+                            arguments = listOf(
+                                navArgument("id") {
+                                    type = NavType.IntType
+                                    nullable = false
+                                }
+                            )
+                        ) {entry ->
+                            AddAccountScreen(navController = navController,
+                                accountId = entry.arguments?.getInt("id") ?: -1)
                         }
                     }
                 }

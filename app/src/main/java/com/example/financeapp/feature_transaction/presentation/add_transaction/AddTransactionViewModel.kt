@@ -101,10 +101,30 @@ class AddTransactionViewModel @Inject constructor(
                                     )
                                 } catch (e: InvalidTransactionException) {
                                 Log.e("error", e.message ?: "Error")
-                            }
+                                }
                             }
                             waiting.await()
                             useCases.addTransaction(
+                                transaction
+                            )
+                        } catch (e: InvalidTransactionException) {
+                            Log.e("error", e.message ?: "Error")
+                        }
+                    }
+                }
+                AddTransactionEvents.DeleteTransaction -> {
+                    viewModelScope.launch {
+                        try {
+                            val transaction = Transaction(
+                                dateTime = state.value.dateTime ?: LocalDateTime.now(),
+                                type = state.value.type,
+                                category = state.value.category,
+                                name = state.value.name,
+                                amount = state.value.amount,
+                                accountId = state.value.accountId,
+                                id = state.value.id
+                            )
+                            useCases.deleteTransaction(
                                 transaction
                             )
                         } catch (e: InvalidTransactionException) {

@@ -28,7 +28,7 @@ fun AccountItem(
             .width(160.dp)
             .padding(vertical = 8.dp)
             .clip(RoundedCornerShape(8.dp)),
-        color = MaterialTheme.colorScheme.background,
+        color = MaterialTheme.colorScheme.surface,
         onClick = { onClick(account) }
     ) {
         Column(

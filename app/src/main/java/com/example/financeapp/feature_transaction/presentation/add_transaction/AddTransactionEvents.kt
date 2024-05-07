@@ -13,4 +13,5 @@ sealed class AddTransactionEvents {
     data class LoadTransaction(val id: Int): AddTransactionEvents()
     data class ChangeAccount(val accountId: Int) : AddTransactionEvents()
     object SaveTransaction: AddTransactionEvents()
+    object DeleteTransaction: AddTransactionEvents()
 }

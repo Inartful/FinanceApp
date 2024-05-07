@@ -62,7 +62,9 @@ fun SelectCategory(
         Text(
             text = getCategoryName(state.value.category),
             fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .weight(1f)
         )
     }
     if (state.value.categoryVisible) {

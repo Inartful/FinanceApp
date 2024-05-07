@@ -32,7 +32,7 @@ fun TransactionsList(
         modifier = modifier
             .fillMaxWidth()
             .clip(shape = RoundedCornerShape(16.dp))
-            .background(MaterialTheme.colorScheme.background)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(start = 10.dp, top = 20.dp, bottom = 2.dp, end = 20.dp)
     ) {
         Column {

@@ -3,7 +3,6 @@ package com.example.financeapp.feature_transaction.presentation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.financeapp.feature_transaction.domain.model.Account
 import com.example.financeapp.feature_transaction.domain.use_cases.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,31 +16,33 @@ class MainViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                useCases.addAccount(
-                    Account(
-                        amount = 0,
-                        name = "General"
-                    )
-                )
-                useCases.addAccount(
-                    Account(
-                        amount = 0,
-                        name = "Saving"
-                    )
-                )
-                useCases.addAccount(
-                    Account(
-                        amount = 0,
-                        name = "For scroll"
-                    )
-                )
+//                useCases.addAccount(
+//                    Account(
+//                        id = 3,
+//                        amount = 0,
+//                        name = "General"
+//                    )
+//                )
+//                useCases.addAccount(
+//                    Account(
+//                        id = 4,
+//                        amount = 0,
+//                        name = "Saving"
+//                    )
+//                )
+//                useCases.addAccount(
+//                    Account(
+//                        amount = 0,
+//                        name = "For scroll"
+//                    )
+//                )
 
-//                repeat(5) {it ->
+//                repeat(10) {it ->
 //                    useCases.deleteAccount(
 //                        Account(
 //                            id = it,
 //                            amount = 0,
-//                            name = "For scroll"
+//                            name = "Saving"
 //                        )
 //                    )
 //                }

@@ -50,7 +50,7 @@ fun MenuScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Yellow)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(horizontal = 16.dp)
                 .verticalScroll(rememberScrollState())
         ) {

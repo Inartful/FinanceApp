@@ -28,12 +28,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.financeapp.R
 import com.example.financeapp.feature_transaction.presentation.util.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,13 +56,13 @@ fun AddAccountScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Create account")
+                    Text(text = stringResource(R.string.create_account))
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate(Screen.MainScreen.route) }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Go back"
+                            contentDescription = stringResource(id = R.string.go_back)
                         )
                     }
                 },
@@ -80,7 +82,7 @@ fun AddAccountScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.Delete,
-                        contentDescription = "Delete",
+                        contentDescription = stringResource(id = R.string.delete),
                         tint = MaterialTheme.colorScheme.onPrimary)
                 }
                 Spacer(modifier = Modifier.height(10.dp))
@@ -95,7 +97,7 @@ fun AddAccountScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.Done,
-                        contentDescription = "Add",
+                        contentDescription = stringResource(id = R.string.add),
                         tint = MaterialTheme.colorScheme.primary)
                 }
             }
@@ -116,7 +118,7 @@ fun AddAccountScreen(
                 },
                 placeholder = {
                     if (state.value.name.isBlank()) {
-                        Text(text = "Enter name",
+                        Text(text = stringResource(R.string.enter_name),
                             fontSize = 20.sp)
                     }
                 },
@@ -155,7 +157,7 @@ fun AddAccountScreen(
                 },
                 placeholder = {
                     if (state.value.amount == null) {
-                        Text(text = "Enter amount",
+                        Text(text = stringResource(id = R.string.enter_amount),
                             fontSize = 20.sp)
                     }
                 },

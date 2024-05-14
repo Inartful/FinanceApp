@@ -8,10 +8,12 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.financeapp.R
 import com.example.financeapp.feature_transaction.presentation.add_transaction.AddTransactionEvents
 import com.example.financeapp.feature_transaction.presentation.add_transaction.AddTransactionViewModel
 
@@ -27,7 +29,7 @@ fun EnterName(
         },
         placeholder = {
             if (state.value.name.isBlank()) {
-                Text(text = "Enter name",
+                Text(text = stringResource(id = R.string.enter_name),
                     fontSize = 20.sp)
             }
         },

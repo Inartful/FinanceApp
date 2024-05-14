@@ -3,8 +3,11 @@ package com.example.financeapp.feature_transaction.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -14,63 +17,97 @@ import androidx.navigation.navArgument
 import com.example.financeapp.feature_transaction.presentation.add_account.AddAccountScreen
 import com.example.financeapp.feature_transaction.presentation.add_transaction.AddTransactionScreen
 import com.example.financeapp.feature_transaction.presentation.menu.MenuScreen
+import com.example.financeapp.feature_transaction.presentation.settings.SettingsScreen
+import com.example.financeapp.feature_transaction.presentation.settings.SettingsViewModel
+import com.example.financeapp.feature_transaction.presentation.util.AppTheme
 import com.example.financeapp.feature_transaction.presentation.util.Screen
 import com.example.financeapp.ui.theme.FinanceAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-//        viewModel.performTransaction()
         setContent {
-            FinanceAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier
-                        .fillMaxSize()
-                ) {
-                    val navController = rememberNavController()
-                    NavHost(
-                        navController = navController,
-                        startDestination = Screen.MainScreen.route
+            val settingsViewModel: SettingsViewModel by viewModels()
+            val settingsState = settingsViewModel.state
+
+            when(settingsState.value.theme) {
+                AppTheme.AutoTheme -> {
+                    FinanceAppTheme(
+                        darkTheme = isSystemInDarkTheme()
                     ) {
-                        composable(route = Screen.MainScreen.route) {
-                            MenuScreen(navController = navController)
-                        }
-
-                        composable(
-                            route = Screen.AddTransaction.route + "/{id}",
-                            arguments = listOf(
-                                navArgument("id") {
-                                    type = NavType.IntType
-                                    nullable = false
-                                }
-                            )
-                        ) { entry ->
-                            AddTransactionScreen(
-                                navController = navController,
-                                transactionId = entry.arguments?.getInt("id") ?: -1
-                            )
-                        }
-
-                        composable(
-                            route = Screen.AddAccount.route + "/{id}",
-                            arguments = listOf(
-                                navArgument("id") {
-                                    type = NavType.IntType
-                                    nullable = false
-                                }
-                            )
-                        ) {entry ->
-                            AddAccountScreen(navController = navController,
-                                accountId = entry.arguments?.getInt("id") ?: -1)
-                        }
+                        Navigation(settingsViewModel)
                     }
                 }
+                AppTheme.DarkTheme -> {
+                    FinanceAppTheme(
+                        darkTheme = true
+                    ) {
+                        Navigation(settingsViewModel)
+                    }
+                }
+                AppTheme.LightTheme -> {
+                    FinanceAppTheme(
+                        darkTheme = false
+                    ) {
+                        Navigation(settingsViewModel)
+                    }
+                }
+            }
+        }
+    }
+}
+@Composable
+fun Navigation(
+    settingsViewModel: SettingsViewModel
+) {
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        val navController = rememberNavController()
+        NavHost(
+            navController = navController,
+            startDestination = Screen.MainScreen.route
+        ) {
+            composable(route = Screen.MainScreen.route) {
+                MenuScreen(navController = navController)
+            }
+
+            composable(route = Screen.Settings.route) {
+                SettingsScreen(
+                    navController = navController,
+                    viewModel = settingsViewModel
+                )
+            }
+
+            composable(
+                route = Screen.AddTransaction.route + "/{id}",
+                arguments = listOf(
+                    navArgument("id") {
+                        type = NavType.IntType
+                        nullable = false
+                    }
+                )
+            ) { entry ->
+                AddTransactionScreen(
+                    navController = navController,
+                    transactionId = entry.arguments?.getInt("id") ?: -1
+                )
+            }
+
+            composable(
+                route = Screen.AddAccount.route + "/{id}",
+                arguments = listOf(
+                    navArgument("id") {
+                        type = NavType.IntType
+                        nullable = false
+                    }
+                )
+            ) {entry ->
+                AddAccountScreen(navController = navController,
+                    accountId = entry.arguments?.getInt("id") ?: -1)
             }
         }
     }

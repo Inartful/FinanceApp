@@ -30,9 +30,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.financeapp.R
 import com.example.financeapp.feature_transaction.presentation.add_transaction.components.EnterAmount
 import com.example.financeapp.feature_transaction.presentation.add_transaction.components.EnterName
 import com.example.financeapp.feature_transaction.presentation.add_transaction.components.SelectAccount
@@ -60,13 +62,13 @@ fun AddTransactionScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Create transaction")
+                    Text(text = stringResource(R.string.create_transaction))
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate(Screen.MainScreen.route) }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Go back"
+                            contentDescription = stringResource(R.string.go_back),
                         )
                     }
                 },
@@ -87,7 +89,7 @@ fun AddTransactionScreen(
                ) {
                    Icon(
                        imageVector = Icons.Rounded.Delete,
-                       contentDescription = "Delete",
+                       contentDescription = stringResource(R.string.delete),
                        tint = MaterialTheme.colorScheme.onPrimary)
                }
                Spacer(modifier = Modifier.height(10.dp))
@@ -102,7 +104,7 @@ fun AddTransactionScreen(
                ) {
                    Icon(
                        imageVector = Icons.Rounded.Done,
-                       contentDescription = "Add",
+                       contentDescription = stringResource(R.string.add),
                        tint = MaterialTheme.colorScheme.primary)
                }
            }

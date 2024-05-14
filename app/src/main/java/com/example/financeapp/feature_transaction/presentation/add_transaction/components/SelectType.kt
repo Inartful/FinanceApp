@@ -14,9 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.financeapp.R
 import com.example.financeapp.feature_transaction.domain.util.TransactionType
 import com.example.financeapp.feature_transaction.presentation.add_transaction.AddTransactionEvents
 import com.example.financeapp.feature_transaction.presentation.add_transaction.AddTransactionViewModel
@@ -46,7 +48,7 @@ fun SelectType(
                     disabledUnselectedColor = Color.Transparent
                 )
             )
-            Text(text = "Income",
+            Text(text = stringResource(R.string.income),
                 fontSize = 20.sp)
         }
         Spacer(modifier = Modifier.width(20.dp))
@@ -66,7 +68,7 @@ fun SelectType(
                     disabledUnselectedColor = Color.Transparent
                 )
             )
-            Text(text = "Expense",
+            Text(text = stringResource(R.string.expense),
                 fontSize = 20.sp)
         }
     }

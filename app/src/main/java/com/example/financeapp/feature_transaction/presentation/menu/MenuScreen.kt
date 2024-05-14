@@ -30,9 +30,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.financeapp.R
 import com.example.financeapp.feature_transaction.presentation.menu.components.AccountsList
 import com.example.financeapp.feature_transaction.presentation.menu.components.TransactionsList
 import com.example.financeapp.feature_transaction.presentation.util.BottomNavigationItem
@@ -47,20 +49,20 @@ fun MenuScreen(
 
     val items = listOf(
         BottomNavigationItem(
-            title = "Home",
+            title = stringResource(R.string.home),
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home,
             hasNews = false,
         ),
         BottomNavigationItem(
-            title = "Chat",
+            title = stringResource(R.string.chat),
             selectedIcon = Icons.Filled.Email,
             unselectedIcon = Icons.Outlined.Email,
             hasNews = false,
             badgeCount = 45
         ),
         BottomNavigationItem(
-            title = "Settings",
+            title = stringResource(R.string.settings),
             selectedIcon = Icons.Filled.Settings,
             unselectedIcon = Icons.Outlined.Settings,
             hasNews = true,
@@ -76,7 +78,7 @@ fun MenuScreen(
                 ) {
                 Icon(
                     imageVector = Icons.Rounded.Add,
-                    contentDescription = "Add",
+                    contentDescription = stringResource(R.string.add),
                     tint = MaterialTheme.colorScheme.primary)
             }
         },
@@ -87,6 +89,9 @@ fun MenuScreen(
                         selected = state.value.selected == index,
                         onClick = {
                             viewModel.onEvent(MenuEvents.ChangePosition(index))
+                            if (index == 2) {
+                                navController.navigate(Screen.Settings.route)
+                            }
                         },
                         label = {
                             Text(text = item.title)
@@ -115,7 +120,7 @@ fun MenuScreen(
                         },
                         colors = NavigationBarItemColors(
                             selectedIconColor = Color.Black,
-                            selectedIndicatorColor = MaterialTheme.colorScheme.background,
+                            selectedIndicatorColor = MaterialTheme.colorScheme.tertiary,
                             selectedTextColor = Color.Black,
                             unselectedTextColor = Color.Black,
                             disabledIconColor = Color.Black,

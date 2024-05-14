@@ -17,9 +17,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.financeapp.R
 import com.example.financeapp.feature_transaction.domain.model.Transaction
 
 @Composable
@@ -45,7 +47,7 @@ fun TransactionsList(
             ) {
                 Text(
                     color = MaterialTheme.colorScheme.secondary,
-                    text = "Latest transactions",
+                    text = stringResource(R.string.latest_transactions),
                     fontSize = 15.sp
                 )
                 Button(
@@ -60,7 +62,7 @@ fun TransactionsList(
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
                 ) {
                     Text(
-                        text = "See all",
+                        text = stringResource(R.string.see_all),
                         fontWeight = FontWeight.Bold
                     )
                 }

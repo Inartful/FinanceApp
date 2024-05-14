@@ -9,11 +9,13 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.financeapp.R
 import com.example.financeapp.feature_transaction.presentation.add_transaction.AddTransactionEvents
 import com.example.financeapp.feature_transaction.presentation.add_transaction.AddTransactionViewModel
 
@@ -40,7 +42,7 @@ fun EnterAmount(
         },
         placeholder = {
             if (state.value.amount <= 0) {
-                Text(text = "Enter amount",
+                Text(text = stringResource(R.string.enter_amount),
                     fontSize = 20.sp)
             }
         },

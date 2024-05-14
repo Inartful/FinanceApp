@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,6 +31,7 @@ import com.example.financeapp.feature_transaction.domain.util.CategoryType
 import com.example.financeapp.feature_transaction.domain.util.TransactionType
 import com.example.financeapp.feature_transaction.domain.util.getCategoryName
 import java.time.LocalDateTime
+import java.util.Locale
 
 @Composable
 fun TransactionItem(
@@ -37,8 +39,6 @@ fun TransactionItem(
     transactionOnClick: (transactionId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-
-    val food = R.drawable.food_dinner_svgrepo_com
 
     Row(
         modifier = modifier
@@ -97,13 +97,13 @@ fun TransactionItem(
                 text =
                 if (transaction.dateTime.dayOfMonth == LocalDateTime.now().dayOfMonth
                         && transaction.dateTime.month == LocalDateTime.now().month) {
-                        "Today"
+                    stringResource(R.string.today)
                     } else if (transaction.dateTime.dayOfMonth == (LocalDateTime.now().dayOfMonth-1)
                         && transaction.dateTime.month == LocalDateTime.now().month) {
-                        "Yesterday"
+                    stringResource(R.string.yesterday)
                     } else {
                         "${transaction.dateTime.dayOfMonth}" +
-                                " ${transaction.dateTime.month}".toLowerCase()
+                                " ${transaction.dateTime.month}".lowercase(Locale.ROOT)
                     },
                 fontSize = 14.sp
             )

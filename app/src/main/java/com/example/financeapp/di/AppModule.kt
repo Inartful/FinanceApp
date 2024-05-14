@@ -56,4 +56,10 @@ class DatabaseModule {
             getAllAccounts = GetAllAccountUseCase(repository)
         )
     }
+
+//    @Provides
+//    @Singleton
+//    fun provideSettingsViewModel(): SettingsViewModel {
+//        return SettingsViewModel()
+//    }
 }

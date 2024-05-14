@@ -27,10 +27,12 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.financeapp.R
 import com.example.financeapp.feature_transaction.presentation.add_transaction.AddTransactionEvents
 import com.example.financeapp.feature_transaction.presentation.add_transaction.AddTransactionState
 import com.example.financeapp.feature_transaction.presentation.add_transaction.AddTransactionViewModel
@@ -48,7 +50,7 @@ fun SelectAccount(
             .clickable { viewModel.onEvent(AddTransactionEvents.ViewAccount) }
     ) {
         Text(
-            text = "Account:",
+            text = stringResource(id = R.string.account) + ":",
             fontSize = 20.sp
         )
         Spacer(modifier = Modifier.width(8.dp))

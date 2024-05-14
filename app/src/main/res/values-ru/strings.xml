@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FinanceApp</string>
+    <string name="add">Добавить</string>
+    <string name="account">Счет</string>
+    <string name="latest_transactions">Последние транзакции</string>
+    <string name="see_all">Все</string>
+    <string name="house">Дом</string>
+    <string name="food">Еда</string>
+    <string name="transport">Транспорт</string>
+    <string name="medicine">Лекарства</string>
+    <string name="personal">Персональные</string>
+    <string name="entertainment">Развлечение</string>
+    <string name="debt">Долги</string>
+    <string name="insurance">Страховка</string>
+    <string name="taxes">Налоги</string>
+    <string name="miscellaneous">Другое</string>
+    <string name="salary">Зарплата</string>
+    <string name="investment">Инвестиции</string>
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="settings">Настройки</string>
+    <string name="chat">Сообщения</string>
+    <string name="home">Дом</string>
+    <string name="create_transaction">Создать транзакцию</string>
+    <string name="go_back">Назад</string>
+    <string name="delete">Удалить</string>
+    <string name="expense">Расходы</string>
+    <string name="income">Доходы</string>
+    <string name="category">Категория</string>
+    <string name="enter_amount">Введите колличество</string>
+    <string name="create_account">Создать счет</string>
+    <string name="enter_name">Введите имя</string>
+    <string name="auto">Автоматически</string>
+    <string name="light">Светлая</string>
+    <string name="dark">Темная</string>
+    <string name="choose_language">Выберите язык</string>
+    <string name="choose_theme">Выберите тему</string>
+</resources>

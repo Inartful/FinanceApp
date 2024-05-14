@@ -16,10 +16,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.financeapp.R
 import com.example.financeapp.feature_transaction.domain.util.CategoryType
 import com.example.financeapp.feature_transaction.domain.util.TransactionType
 import com.example.financeapp.feature_transaction.domain.util.getCategoryName
@@ -55,7 +57,7 @@ fun SelectCategory(
             .clickable { viewModel.onEvent(AddTransactionEvents.ViewCategory) }
     ) {
         Text(
-            text = "Category:",
+            text = stringResource(R.string.category),
             fontSize = 20.sp
         )
         Spacer(modifier = Modifier.width(8.dp))

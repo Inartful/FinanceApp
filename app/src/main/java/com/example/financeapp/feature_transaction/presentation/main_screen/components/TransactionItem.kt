@@ -1,4 +1,4 @@
-package com.example.financeapp.feature_transaction.presentation.menu.components
+package com.example.financeapp.feature_transaction.presentation.main_screen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,8 +30,8 @@ import com.example.financeapp.feature_transaction.domain.model.Transaction
 import com.example.financeapp.feature_transaction.domain.util.CategoryType
 import com.example.financeapp.feature_transaction.domain.util.TransactionType
 import com.example.financeapp.feature_transaction.domain.util.getCategoryName
+import com.example.financeapp.feature_transaction.presentation.util.getCurrentDate
 import java.time.LocalDateTime
-import java.util.Locale
 
 @Composable
 fun TransactionItem(
@@ -102,8 +102,7 @@ fun TransactionItem(
                         && transaction.dateTime.month == LocalDateTime.now().month) {
                     stringResource(R.string.yesterday)
                     } else {
-                        "${transaction.dateTime.dayOfMonth}" +
-                                " ${transaction.dateTime.month}".lowercase(Locale.ROOT)
+                        getCurrentDate()
                     },
                 fontSize = 14.sp
             )
@@ -126,20 +125,3 @@ fun TransactionItem(
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun TransactionItemPreview() {
-//    FinanceAppTheme {
-//        TransactionItem(transaction = Transaction(
-//            id = 1,
-//            LocalDateTime.now(),
-//            type = TransactionType.Income,
-//            amount = 150000,
-//            accountId = 1,
-//            category = CategoryType.Income.Salary,
-//            name = "Communistic status online"
-//        ),
-//            transactionOnClick = {})
-//    }
-//}

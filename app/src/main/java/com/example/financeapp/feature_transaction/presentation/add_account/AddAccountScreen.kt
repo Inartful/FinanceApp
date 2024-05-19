@@ -59,7 +59,7 @@ fun AddAccountScreen(
                     Text(text = stringResource(R.string.create_account))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate(Screen.MainScreen.route) }) {
+                    IconButton(onClick = { navController.navigate(Screen.AddTransaction.route) }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.go_back)

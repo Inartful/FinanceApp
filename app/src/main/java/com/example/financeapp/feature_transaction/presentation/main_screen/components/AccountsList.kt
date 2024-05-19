@@ -1,4 +1,4 @@
-package com.example.financeapp.feature_transaction.presentation.menu.components
+package com.example.financeapp.feature_transaction.presentation.main_screen.components
 
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items

@@ -1,19 +1,12 @@
 package com.example.financeapp.feature_transaction.presentation.menu
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.rounded.Add
@@ -31,12 +24,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.financeapp.R
-import com.example.financeapp.feature_transaction.presentation.menu.components.AccountsList
-import com.example.financeapp.feature_transaction.presentation.menu.components.TransactionsList
+import com.example.financeapp.feature_transaction.presentation.history.HistoryScreen
+import com.example.financeapp.feature_transaction.presentation.main_screen.MainScreen
 import com.example.financeapp.feature_transaction.presentation.util.BottomNavigationItem
 import com.example.financeapp.feature_transaction.presentation.util.Screen
 
@@ -55,17 +47,16 @@ fun MenuScreen(
             hasNews = false,
         ),
         BottomNavigationItem(
-            title = stringResource(R.string.chat),
-            selectedIcon = Icons.Filled.Email,
-            unselectedIcon = Icons.Outlined.Email,
-            hasNews = false,
-            badgeCount = 45
+            title = stringResource(R.string.history),
+            selectedIcon = Icons.Filled.DateRange,
+            unselectedIcon = Icons.Outlined.DateRange,
+            hasNews = false
         ),
         BottomNavigationItem(
             title = stringResource(R.string.settings),
             selectedIcon = Icons.Filled.Settings,
             unselectedIcon = Icons.Outlined.Settings,
-            hasNews = true,
+            hasNews = false,
         ),
     )
 
@@ -88,8 +79,10 @@ fun MenuScreen(
                     NavigationBarItem(
                         selected = state.value.selected == index,
                         onClick = {
-                            viewModel.onEvent(MenuEvents.ChangePosition(index))
-                            if (index == 2) {
+                            if (index in 0..1){
+                                viewModel.onEvent(MenuEvents.ChangePosition(index))
+                            }
+                            else if (index == 2) {
                                 navController.navigate(Screen.Settings.route)
                             }
                         },
@@ -121,8 +114,8 @@ fun MenuScreen(
                         colors = NavigationBarItemColors(
                             selectedIconColor = Color.Black,
                             selectedIndicatorColor = MaterialTheme.colorScheme.tertiary,
-                            selectedTextColor = Color.Black,
-                            unselectedTextColor = Color.Black,
+                            selectedTextColor = MaterialTheme.colorScheme.onSurface,
+                            unselectedTextColor = MaterialTheme.colorScheme.onSurface,
                             disabledIconColor = Color.Black,
                             disabledTextColor = Color.Black,
                             unselectedIconColor = Color.Black
@@ -132,28 +125,12 @@ fun MenuScreen(
             }
         }
     ) {padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(padding)
-                .padding(horizontal = 16.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
-            AccountsList(
-                accounts = state.value.accounts,
-                onClick = { account ->
-                    viewModel.onEvent(MenuEvents.ChangeAccount(account))
-                }
+        when(state.value.selected) {
+            0 -> MainScreen(
+                navController = navController,
+                modifier = Modifier.padding(padding)
             )
-            Spacer(modifier = Modifier.height(14.dp))
-            TransactionsList(
-                transactions = state.value.transactions,
-                historyOnClick = {},
-                transactionOnClick = {transactionId ->
-                    navController.navigate(Screen.AddTransaction.route + "/$transactionId")
-                }
-            )
+            1 -> HistoryScreen(navController = navController)
         }
     }
 }

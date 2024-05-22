@@ -168,7 +168,7 @@ fun MainScreen(
             TransactionsList(
                 transactions = state.value.transactions,
                 historyOnClick = {
-                    navController.navigate(Screen.History.route)
+                    navController.navigate(Screen.History.route + "/${state.value.accountId}")
                 },
                 transactionOnClick = {transactionId ->
                     navController.navigate(Screen.AddTransaction.route + "/$transactionId")

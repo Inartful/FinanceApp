@@ -112,9 +112,16 @@ fun Navigation(
             }
             
             composable(
-                route = Screen.History.route
-            ) {
-                HistoryScreen(navController = navController)
+                route = Screen.History.route + "/{id}",
+                arguments = listOf(
+                    navArgument("id") {
+                        type = NavType.IntType
+                        nullable = false
+                    }
+                )
+            ) {entry ->
+                HistoryScreen(navController = navController,
+                    accountId = entry.arguments?.getInt("id") ?: -1)
             }
         }
     }

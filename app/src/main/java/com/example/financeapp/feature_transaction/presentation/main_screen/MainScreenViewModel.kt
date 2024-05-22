@@ -48,6 +48,9 @@ class MainScreenViewModel @Inject constructor(
                 )
                 val firstAccountId = accounts.firstOrNull()?.id
                 if (firstAccountId != null) {
+                    _state.value = state.value.copy(
+                        accountId = firstAccountId
+                    )
                     useCases.getAllTransactions(firstAccountId)
                 } else {
                     flowOf(emptyList())
@@ -66,6 +69,9 @@ class MainScreenViewModel @Inject constructor(
     }
 
     private fun getTransactions(accountId: Int) {
+        _state.value = state.value.copy(
+            accountId = accountId
+        )
         getTransactionsJob?.cancel()
         getTransactionsJob = useCases.getAllTransactions(accountId)
             .onEach { transactions ->
